@@ -135,7 +135,7 @@ function BinarySearchTree() {
     }
    
     var minNode = function(node) {
-        console.log(node)
+        
         if(node) {
             while(node && node.left !== null) {
                 node = node.left
@@ -165,6 +165,7 @@ function BinarySearchTree() {
     this.inOrderTraverse = function(callback){
         //Visita todos os nós da arvore usando um percurso em ordem
         inOrderTraverseNode(root, callback)
+        
     }
 
     var inOrderTraverseNode = function(node, callback){
@@ -272,14 +273,24 @@ tree.insert('s');
 tree.insert('t');
 
 
-tree.min();
-tree.max();
 /*
 tree.search('j');
 tree.remove('m');
+
+tree.min();
+tree.max();
 */
  tree.inOrderTraverse(printNode);
+ console.log("-----------------------------------");
+tree.preOrderTraverse(printNode);
+console.log("-----------------------------------");
+tree.postOrderTraverse(printNode);
+console.log("-----------------------------------");
+console.log("CABEI ESSA PORRA EM 18/09/2020 AS 18:17 ")
 
 //INSERT OK
 //SERACH Ok
 //REMOVE OK
+//MIN OK
+//MAX OK
+//Vizualização OK
