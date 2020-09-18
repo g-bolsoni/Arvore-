@@ -5,13 +5,15 @@ function BinarySearchTree() {
         this.right = null
     }
     var root = null
+    //var key = key.toUpperCase().charCodeAt(0);
+    //console.log(key)
 
     this.insert = function(key){
         //Insere uma chave
         try{    
         // A letra virar numero
             key_1 = key.toUpperCase().charCodeAt(0);
-            key = key_1
+           key = key_1
 
             var newNode = new Node(key)
             if(root === null){
@@ -21,6 +23,8 @@ function BinarySearchTree() {
             }
         }catch(err){
             console.log(`${err} \nO valor digitado não é um valor aceitavel, tente novamente; \n`)
+            return (`${err} \nO valor digitado não é um valor aceitavel, tente novamente; \n`)
+            
         }
     }
 //Função Auxiliar Inserção
@@ -39,56 +43,81 @@ function BinarySearchTree() {
             }
         }  
     }
+   
     //Search
     this.search = function(key){
-        // console.log(`Root -> ${root}\t Key -> ${key}`)
+        
+        //console.log(`Root -> ${root}\t Key -> ${key}`)
+      //console.log(key)
+        key_aux = key.toUpperCase().charCodeAt(0);
+        //|console.log(root)
         //Busca uma chaave
-        return searchNode(root, key)
+
+        return searchNode(root, key_aux)
+
     }
 
     var searchNode = function(node, key){
-        if(node === null){
-            return false
-        }
-        if(key < node.key){
-            return searchNode(node.left, key)
-        }else if(key > node.key){
-            return searchNode(node.right, key)
-        }else{
-            return true
+        try{
+            //console.log(node)
+           //console.log("Chave "+key)//Numeero
+            //console.log(node)
+            if(node == null){
+                return false;
+            }
+        
+            if(node.key > key){
+                console.log(searchNode(node.left, key));
+                return searchNode(node.left, key)
+            }else if(node.key < key){
+                console.log(searchNode(node.right, key));
+                return searchNode(node.right, key)
+            }else{
+                return true
+            }
+        }catch(err){
+            console.log(`Entrou no catch erro =>  ${err}`)
         }
     }
     //Remove
     this.remove = function(key) {
-        root = removeNode(root, key)
+        //console.log("KEY"+key)
+        key_aux = key.toUpperCase().charCodeAt(0)
+        //console.log(key_aux)
+        root = removeNode(root, key_aux)
     }
 
     var removeNode = function(node, key) {
-        if(node === null) {
-            return null
-        }
-        if(key < node.key) {
-            node.left = removeNode(node.left, key)
-            return node
-        } else if(key > node.key) {
-            node.right = removeNode(node.right, key)
-            return node
-        } else {
-            if(node.left === null && node.right === null) {
-                node = null
+        try{
+            if(node === null) {
+                return null
+            }
+            //console.log('\nREMOÇÂO '+key, node.key+'\n ')
+            if(key < node.key) {
+                node.left = removeNode(node.left, key)
+                return node
+            } else if(key > node.key) {
+                node.right = removeNode(node.right, key)
+                return node
+            } else {
+                if(node.left === null && node.right === null) {
+                    node = null
+                    return node
+                }
+                if(node.left === null) {
+                    node = node.right
+                    return node
+                } else if(node.right === null) {
+                    node = node.left
+                    return node
+                }
+                var aux = findMinNode(node.right)
+                node.key = aux.key
+                node.right = removeNode(node.right, aux.key)
                 return node
             }
-            if(node.left === null) {
-                node = node.right
-                return node
-            } else if(node.right === null) {
-                node = node.left
-                return node
-            }
-            var aux = findMinNode(node.right)
-            node.key = aux.key
-            node.right = removeNode(node.right, aux.key)
-            return node
+        }catch(err){
+            console.log(`Erro no REMOVE -> ${err}`)
         }
     }
     //Find
@@ -173,9 +202,9 @@ function BinarySearchTree() {
     }
 }
 function printNode(value){
-
     value_aux = String.fromCharCode(value)
     console.log(value_aux)
+    return value_aux;
 }
 
 var tree = new BinarySearchTree()
@@ -215,24 +244,36 @@ var tree = new BinarySearchTree()
 
 //console.log(tree.search(6));            
 
-tree.insert('m');
-tree.insert('n');
-tree.insert('A');
+
+tree.insert('a');
 tree.insert('B');
 tree.insert('D');
 tree.insert('C');
-tree.insert('F');
-tree.insert('G');
 tree.insert('E');
-tree.insert('H');
-tree.insert('I');
-tree.insert('K');
-tree.insert('J');
-tree.insert('L');
+tree.insert('f');
+tree.insert('g');
+tree.insert('h');
+tree.insert('i');
+tree.insert('j');
+tree.insert('k');
+tree.insert('l');
+tree.insert('m');
+tree.insert('n');
+tree.insert('o');
+tree.insert('p');
+tree.insert('q');
+tree.insert('r');
+tree.insert('s');
+tree.insert('t');
 
 
-tree.search('B');
 
-
+/*
+tree.search('j');
+tree.remove('m');
+*/
  tree.inOrderTraverse(printNode);
 
+//INSERT OK
+//SERACH Ok
+//REMOVE OK
