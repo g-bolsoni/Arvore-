@@ -126,18 +126,22 @@ function BinarySearchTree() {
         while(node && node.left !== null) {
             node = node.left
         }
+        
         return node
     }
-
+ //Min
     this.min = function() {
         return minNode(root)
     }
-    //Min
+   
     var minNode = function(node) {
+        console.log(node)
         if(node) {
             while(node && node.left !== null) {
                 node = node.left
             }
+
+            console.log(`A/O menor é a letra ${String.fromCharCode(node.key)}, e seu códico ASCII é ${node.key}`)
             return node.key
         }
         return null
@@ -152,6 +156,7 @@ function BinarySearchTree() {
             while(node && node.right !== null) {
                 node = node.right
             }
+            console.log(`A/O Maior é a letra ${String.fromCharCode(node.key)}, e seu códico ASCII é ${node.key}`)
             return node.key
         }
         return null
@@ -267,7 +272,8 @@ tree.insert('s');
 tree.insert('t');
 
 
-
+tree.min();
+tree.max();
 /*
 tree.search('j');
 tree.remove('m');
